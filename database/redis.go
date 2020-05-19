@@ -35,10 +35,24 @@ func HSetKey(key,field string,value generic.Type){
 	_ = client.HSetNX(key,field,value)
 }
 
+func HGetKey(key,field string) string {
+	return client.HGet(key,field).String()
+}
+
 func HValKey(key string) string {
 	return client.HVals(key).String()
 }
 
 func HDelField(key,field string) {
 	_ = client.HDel(key,field)
+}
+
+func HasKey(key string) bool {
+	exists, _ := client.Exists(key).Uint64()
+
+	if exists == 1 {
+		return true
+	}
+
+	return false
 }

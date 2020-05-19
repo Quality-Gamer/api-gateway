@@ -34,7 +34,6 @@ func Route(c echo.Context) (err error) {
 		return json.NewEncoder(c.Response()).Encode(res)
 	}
 
-	microservice := conf.Microservice
 	action := ""
 	ms := input.Microservice
 
@@ -46,6 +45,17 @@ func Route(c echo.Context) (err error) {
 
 	var response generic.Type
 	hasCache := false
+	apiKey := c.Request().Header.Get("api-key")
+	urlMicroservice, ok := getRequestedMicroservice(ms,apiKey)
+
+	if !ok {
+		var r model.Response
+		r.Status = conf.ErrorCode
+		r.Message = conf.ErrorPermission
+		res.Response = r
+		c.Response().WriteHeader(http.StatusOK)
+		return json.NewEncoder(c.Response()).Encode(res)
+	}
 
 	if input.Cacheable == 1 {
 		response, hasCache = getCache(ms,input.Params)
@@ -54,9 +64,9 @@ func Route(c echo.Context) (err error) {
 
 	if !hasCache {
 		if input.Method == "POST" {
-			response = makePOSTRequest(microservice[ms], input.Params, action, ms, input.Cacheable)
+			response = makePOSTRequest(urlMicroservice, input.Params, action, ms, input.Cacheable)
 		} else {
-			response = makeGETRequest(microservice[ms], input.Params, action, ms, input.Cacheable)
+			response = makeGETRequest(urlMicroservice, input.Params, action, ms, input.Cacheable)
 		}
 		c.Response().Header().Set("cache","false")
 	}
@@ -196,6 +206,18 @@ func generateHash(s string) string{
 	hash := sha1.New()
 	hash.Write([]byte(s))
 	return hex.EncodeToString(hash.Sum(nil))
+}
+
+func getRequestedMicroservice(ms,key string) (string,bool) {
+	msKey := conf.GetAuthRequestedKey(key)
+	has := database.HasKey(msKey)
+
+	if has {
+		val := database.HGetKey(msKey,ms)
+		return val,true
+	}
+
+	return "",false
 }
 
 func debugStoppedMicroservices(){

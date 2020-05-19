@@ -7,6 +7,8 @@ const Stop = "st"
 const Cache = "cc"
 const Key = "ky"
 const QualityGamer = "qg"
+const Route = "rt"
+const URL = "ur"
 
 func getDefaultKey() string {
 	return GateWay + ":" + MServices
@@ -34,4 +36,8 @@ func GetCacheCountKey(ms,hash string) string {
 
 func GetAuthKey() string {
 	return getDefaultKey() + ":" + Key + ":" + QualityGamer
+}
+
+func GetAuthRequestedKey(key string) string {
+	return getDefaultKey() + ":" + Route + ":" + key + ":" + URL
 }
