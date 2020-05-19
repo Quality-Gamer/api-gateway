@@ -1,6 +1,11 @@
 package auth
 
+import (
+	"gateway/conf"
+	"gateway/database"
+)
+
 func KeyValidator(key string) bool {
-	token := "2cfd648bde02d8c3271ae1d9f7226f7e" //temporário
+	token := database.GetKey(conf.GetAuthKey())
 	return key == token
 }

@@ -5,6 +5,8 @@ const MServices = "ms"
 const Count = "ct"
 const Stop = "st"
 const Cache = "cc"
+const Key = "ky"
+const QualityGamer = "qg"
 
 func getDefaultKey() string {
 	return GateWay + ":" + MServices
@@ -28,4 +30,8 @@ func GetCacheKey(ms,hash string) string {
 
 func GetCacheCountKey(ms,hash string) string {
 	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash + ":" + Count
+}
+
+func GetAuthKey() string {
+	return getDefaultKey() + ":" + Key + ":" + QualityGamer
 }
