@@ -181,6 +181,7 @@ func getCache(ms string, params map[string]string) (generic.Type,bool) {
 	}
 
 	hash := generateHash(string)
+	database.IncrValue(conf.GetCacheCountKey(ms,hash))
 	r := database.GetKey(conf.GetCacheKey(ms,hash))
 	var response generic.Type
 	if r == "" {

@@ -25,3 +25,7 @@ func GetStoppedMicroserviceKey() string {
 func GetCacheKey(ms,hash string) string {
 	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash
 }
+
+func GetCacheCountKey(ms,hash string) string {
+	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash + ":" + Count
+}
