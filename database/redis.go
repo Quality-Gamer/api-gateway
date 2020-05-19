@@ -36,7 +36,7 @@ func HSetKey(key,field string,value generic.Type){
 }
 
 func HGetKey(key,field string) string {
-	return client.HGet(key,field).String()
+	return client.HGet(key,field).Val()
 }
 
 func HValKey(key string) string {
