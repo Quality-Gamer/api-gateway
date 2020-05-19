@@ -1,6 +1,8 @@
 package request
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"gateway/conf"
@@ -43,11 +45,20 @@ func Route(c echo.Context) (err error) {
 	incrRequest(input.Microservice,input.Action)
 
 	var response generic.Type
+	hasCache := false
 
-	if input.Method == "POST" {
-		response = makePOSTRequest(microservice[ms], input.Params, action, ms)
-	} else {
-		response = makeGETRequest(microservice[ms], input.Params, action, ms)
+	if input.Cacheable == 1 {
+		response, hasCache = getCache(ms,input.Params)
+		c.Response().Header().Set("cache","true")
+	}
+
+	if !hasCache {
+		if input.Method == "POST" {
+			response = makePOSTRequest(microservice[ms], input.Params, action, ms, input.Cacheable)
+		} else {
+			response = makeGETRequest(microservice[ms], input.Params, action, ms, input.Cacheable)
+		}
+		c.Response().Header().Set("cache","false")
 	}
 
 	res.Response = response
@@ -55,7 +66,7 @@ func Route(c echo.Context) (err error) {
 	return json.NewEncoder(c.Response()).Encode(res)
 }
 
-func makePOSTRequest(url string, params map[string]string, action string,ms string) generic.Type  {
+func makePOSTRequest(url string, params map[string]string, action string,ms string, cacheable int) generic.Type  {
 	urlComplete := url + "/" + action
 	var strPost = []byte("POST")
 	var strRequestURI = []byte(urlComplete)
@@ -80,13 +91,16 @@ func makePOSTRequest(url string, params map[string]string, action string,ms stri
 	turnOnMicroservice(ms)
 
 	body := res.Body()
+	if cacheable == 1 {
+		saveCache(ms,body,params)
+	}
 	var r generic.Type
 	json.Unmarshal(body,&r)
 
 	return r
 }
 
-func makeGETRequest(url string, params map[string]string, action string,ms string) generic.Type  {
+func makeGETRequest(url string, params map[string]string, action string,ms string,cacheable int) generic.Type  {
 	urlComplete := url + "/" + action
 	var strPost = []byte("GET")
 
@@ -121,6 +135,9 @@ func makeGETRequest(url string, params map[string]string, action string,ms strin
 	turnOnMicroservice(ms)
 
 	body := res.Body()
+	if cacheable == 1 {
+		saveCache(ms,body,params)
+	}
 	var r generic.Type
 	json.Unmarshal(body,&r)
 
@@ -141,6 +158,43 @@ func stopMicroservice(ms string) {
 
 func turnOnMicroservice(ms string) {
 	database.HDelField(conf.GetStoppedMicroserviceKey(),ms)
+}
+
+func saveCache(ms string, body []byte, params map[string]string){
+	var string string
+	string = ms
+
+	for key,value := range params {
+		string += key + value
+	}
+
+	hash := generateHash(string)
+	database.SetKey(conf.GetCacheKey(ms,hash),body)
+}
+
+func getCache(ms string, params map[string]string) (generic.Type,bool) {
+	var string string
+	string = ms
+
+	for key,value := range params {
+		string += key + value
+	}
+
+	hash := generateHash(string)
+	r := database.GetKey(conf.GetCacheKey(ms,hash))
+	var response generic.Type
+	if r == "" {
+		return response,false
+	}
+
+	json.Unmarshal([]byte(r),&response)
+	return response,true
+}
+
+func generateHash(s string) string{
+	hash := sha1.New()
+	hash.Write([]byte(s))
+	return hex.EncodeToString(hash.Sum(nil))
 }
 
 func debugStoppedMicroservices(){

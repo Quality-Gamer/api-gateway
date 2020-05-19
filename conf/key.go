@@ -4,6 +4,7 @@ const GateWay = "gt"
 const MServices = "ms"
 const Count = "ct"
 const Stop = "st"
+const Cache = "cc"
 
 func getDefaultKey() string {
 	return GateWay + ":" + MServices
@@ -19,4 +20,8 @@ func GetMicroserviceActionKeyCount(ms,action string) string {
 
 func GetStoppedMicroserviceKey() string {
 	return getDefaultKey() + ":" + Stop
+}
+
+func GetCacheKey(ms,hash string) string {
+	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash
 }

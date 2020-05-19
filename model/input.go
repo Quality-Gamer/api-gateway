@@ -5,4 +5,5 @@ type Input struct {
 	Action       string            `json:"action"`
 	Params       map[string]string `json:"params"`
 	Method       string			   `json:"method"`
+	Cacheable	 int			   `json:"cacheable"`
 }
