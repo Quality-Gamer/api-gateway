@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/cheekybits/genny/generic"
-	"github.com/go-redis/redis"
+	"github.com/go-redis/redis/v8"
 )
 
 var client = redis.NewClient(&redis.Options{
