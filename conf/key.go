@@ -30,8 +30,8 @@ func GetCacheKey(ms,hash string) string {
 	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash
 }
 
-func GetCacheCountKey(ms,hash string) string {
-	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + hash + ":" + Count
+func GetCacheCountKey(ms string) string {
+	return getDefaultKey() + ":" + Cache + ":" + ms + ":" + Count
 }
 
 func GetAuthKey() string {

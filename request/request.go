@@ -191,7 +191,7 @@ func getCache(ms string, params map[string]string) (generic.Type,bool) {
 	}
 
 	hash := generateHash(string)
-	database.IncrValue(conf.GetCacheCountKey(ms,hash))
+	database.IncrValue(conf.GetCacheCountKey(ms))
 	r := database.GetKey(conf.GetCacheKey(ms,hash))
 	var response generic.Type
 	if r == "" {
@@ -211,7 +211,6 @@ func generateHash(s string) string{
 func getRequestedMicroservice(ms,key string) (string,bool) {
 	msKey := conf.GetAuthRequestedKey(key)
 	has := database.HasKey(msKey)
-
 	if has {
 		val := database.HGetKey(msKey,ms)
 		return val,true
