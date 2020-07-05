@@ -1,9 +1,12 @@
 package database
 
 import (
+	"context"
 	"github.com/cheekybits/genny/generic"
-	"github.com/go-redis/redis/v8"
+	"github.com/go-redis/redis"
 )
+
+var ctx = context.Background()
 
 var client = redis.NewClient(&redis.Options{
 	Addr:     "localhost:6379",
@@ -16,11 +19,11 @@ func ConnectRedis() *redis.Client {
 }
 
 func SetKey(key string, value generic.Type) {
-	_ = client.Set(key, value, 0).Err()
+	_ = client.Set(ctx,key, value, 0).Err()
 }
 
 func GetKey(key string) string {
-	val, err := client.Get(key).Result()
+	val, err := client.Get(ctx,key).Result()
 	if err != nil {
 		return ""
 	}
@@ -28,27 +31,27 @@ func GetKey(key string) string {
 }
 
 func IncrValue(key string) {
-	_ = client.Incr(key)
+	_ = client.Incr(ctx,key)
 }
 
 func HSetKey(key,field string,value generic.Type){
-	_ = client.HSetNX(key,field,value)
+	_ = client.HSetNX(ctx,key,field,value)
 }
 
 func HGetKey(key,field string) string {
-	return client.HGet(key,field).Val()
+	return client.HGet(ctx,key,field).Val()
 }
 
 func HValKey(key string) string {
-	return client.HVals(key).String()
+	return client.HVals(ctx,key).String()
 }
 
 func HDelField(key,field string) {
-	_ = client.HDel(key,field)
+	_ = client.HDel(ctx,key,field)
 }
 
 func HasKey(key string) bool {
-	exists, _ := client.Exists(key).Uint64()
+	exists, _ := client.Exists(ctx,key).Uint64()
 
 	if exists == 1 {
 		return true
