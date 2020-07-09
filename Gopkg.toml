@@ -33,19 +33,10 @@
   name = "github.com/go-redis/redis"
   version = "6.15.8"
 
-[[constraint]]
-  name = "github.com/labstack/echo"
-  version = "3.3.10"
-
-[[constraint]]
-  name = "github.com/valyala/fasthttp"
-  version = "20180529.0.0"
-
 [prune]
   go-tests = true
   unused-packages = true
 
-[metadata.heroku]
-root-package = "github.com/theblueskies/your_app_folder_name"
-install = [ "./..." ]
-go-version = "go1.12.7"
+[[constraint]]
+  name = "github.com/labstack/echo"
+  version = "4.1.16"
