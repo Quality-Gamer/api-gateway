@@ -1,9 +1,9 @@
 package request
 
 import (
-	"../conf"
-	"../database"
-	"../model"
+	"api-gateway/conf"
+	"api-gateway/database"
+	"api-gateway/model"
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"

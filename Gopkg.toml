@@ -19,10 +19,14 @@
 #   name = "github.com/x/y"
 #   version = "2.4.0"
 #
-# [prune]
-#   non-go = false
-#   go-tests = true
-#   unused-packages = true
+
+[prune]
+  non-go = true
+
+  [[prune.project]]
+    name = "github.com/Quality-Gamer/api-gateway"
+    go-tests = true
+    non-go = false
 
 
 [[constraint]]
@@ -33,14 +37,11 @@
   name = "github.com/go-redis/redis"
   version = "6.15.8"
 
-[prune]
-  go-tests = true
-  unused-packages = true
-
 [metadata.heroku]
     root-package = "github.com/Quality-Gamer/api-gateway"
     install = [ "./..." ]
     go-version = "go1.12.7"
+
 [[constraint]]
   name = "github.com/labstack/echo"
-  version = "4.1.13"
+  version = "^4.1.12"

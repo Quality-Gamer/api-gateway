@@ -1,10 +1,10 @@
 package main
 
 import (
-	"./auth"
-	"./request"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"api-gateway/auth"
+	"api-gateway/request"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 //main contains all API endpoints
