@@ -40,3 +40,8 @@
 [[constraint]]
   name = "github.com/labstack/echo"
   version = "4.1.16"
+
+[metadata.heroku]
+    root-package = "github.com/Quality-Gamer/api-gateway"
+    install = [ "./..." ]
+    go-version = "go1.12.7
