@@ -44,3 +44,8 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+root-package = "github.com/theblueskies/your_app_folder_name"
+install = [ "./..." ]
+go-version = "go1.12.7"
