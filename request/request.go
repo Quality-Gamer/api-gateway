@@ -1,13 +1,13 @@
 package request
 
 import (
+	"api-gateway/conf"
+	"api-gateway/database"
+	"api-gateway/model"
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"gateway/conf"
-	"gateway/database"
-	"gateway/model"
 	"github.com/cheekybits/genny/generic"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"

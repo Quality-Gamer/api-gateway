@@ -2,7 +2,7 @@ package database
 
 import (
 	"github.com/cheekybits/genny/generic"
-	"github.com/go-redis/redis/v8"
+	"github.com/go-redis/redis"
 )
 
 var client = redis.NewClient(&redis.Options{
@@ -48,9 +48,9 @@ func HDelField(key,field string) {
 }
 
 func HasKey(key string) bool {
-	exists, _ := client.Exists(key).Uint64()
+	exists := client.Exists(key)
 
-	if exists == 1 {
+	if exists.Val() == 1 {
 		return true
 	}
 

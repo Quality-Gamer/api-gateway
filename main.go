@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gateway/auth"
-	"gateway/request"
+	"api-gateway/auth"
+	"api-gateway/request"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
