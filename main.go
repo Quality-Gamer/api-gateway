@@ -1,8 +1,8 @@
 package main
 
 import (
-	"../auth"
-	"../request"
+	"./auth"
+	"./request"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
