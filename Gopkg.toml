@@ -33,6 +33,14 @@
   name = "github.com/go-redis/redis"
   version = "6.15.8"
 
+[[constraint]]
+  name = "github.com/labstack/echo"
+  version = "3.3.10"
+
+[[constraint]]
+  name = "github.com/valyala/fasthttp"
+  version = "20180529.0.0"
+
 [prune]
   go-tests = true
   unused-packages = true
