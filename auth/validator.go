@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"api-gateway/conf"
-	"api-gateway/database"
+	"conf"
+	"database"
 )
 
 func KeyValidator(key string) bool {
