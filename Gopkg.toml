@@ -44,4 +44,4 @@
 
 [[constraint]]
   name = "github.com/labstack/echo"
-  version = "^4.1.12"
+  version = "3.3.10"

@@ -10,6 +10,14 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:8a6b239612a68a5644f752fd35f402f182192a984f955a6cfb0b9416a47a9273"
+  name = "github.com/dgrijalva/jwt-go"
+  packages = ["."]
+  pruneopts = "N"
+  revision = "06ea1031745cb8b3dab3f6a236daf2b0aa468b7e"
+  version = "v3.2.0"
+
+[[projects]]
   digest = "1:d112eab38298efc9dab630a03a06c1480ed5cb15b7f126f1c8f9edc126023ef1"
   name = "github.com/go-redis/redis"
   packages = [
@@ -38,19 +46,24 @@
   version = "v1.10.10"
 
 [[projects]]
-  digest = "1:14828c2ccce1874bcece469feeb19ccf367075ea515c119edd7c23d0819e6d67"
+  digest = "1:f394142fb2b3c35b55889f558832f18531ef4e7db4cbdf81340dbded222a27d7"
   name = "github.com/labstack/echo"
-  packages = ["."]
+  packages = [
+    ".",
+    "middleware",
+  ]
   pruneopts = "N"
-  revision = "6e7c7cea03c4ac9d551c98d92fc4168888b8e2d5"
-  version = "v4.1.16"
+  revision = "38772c686c76b501f94bd6cd5b77f5842e93b559"
+  version = "v3.3.10"
 
 [[projects]]
   digest = "1:16c5aa7a2031ac369373ddbecaeb0e523350d6469f87c82a1e1e05c973c88dc9"
   name = "github.com/labstack/gommon"
   packages = [
+    "bytes",
     "color",
     "log",
+    "random",
   ]
   pruneopts = "N"
   revision = "4919956f6fb227b548f004da27c7c6b20fba499f"
@@ -115,13 +128,7 @@
   branch = "master"
   digest = "1:0ce077348c2eab796dcd63e8998848893ae8deaf9da91a8011ed907db1354c05"
   name = "golang.org/x/net"
-  packages = [
-    "http/httpguts",
-    "http2",
-    "http2/h2c",
-    "http2/hpack",
-    "idna",
-  ]
+  packages = ["idna"]
   pruneopts = "N"
   revision = "ab34263943818b32f575efc978a3d24e80b04bd7"
 
@@ -168,6 +175,7 @@
     "github.com/cheekybits/genny/generic",
     "github.com/go-redis/redis",
     "github.com/labstack/echo",
+    "github.com/labstack/echo/middleware",
     "github.com/valyala/fasthttp",
   ]
   solver-name = "gps-cdcl"
