@@ -2,6 +2,20 @@
 
 
 [[projects]]
+  branch = "master"
+  digest = "1:535387fc59142c62ca447661a8d6401560d9a9f82d4d7695bd6449158f002f29"
+  name = "github.com/Quality-Gamer/api-gateway"
+  packages = [
+    "auth",
+    "conf",
+    "database",
+    "model",
+    "request",
+  ]
+  pruneopts = "T"
+  revision = "8b7d264028b86443d2ffefe158d1bf12a633305a"
+
+[[projects]]
   digest = "1:8999b488d7e86b608d32f631eb95a2f1472445bb0e8f49bb59ab1b983244bd68"
   name = "github.com/cheekybits/genny"
   packages = ["generic"]
@@ -172,6 +186,11 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/Quality-Gamer/api-gateway/auth",
+    "github.com/Quality-Gamer/api-gateway/conf",
+    "github.com/Quality-Gamer/api-gateway/database",
+    "github.com/Quality-Gamer/api-gateway/model",
+    "github.com/Quality-Gamer/api-gateway/request",
     "github.com/cheekybits/genny/generic",
     "github.com/go-redis/redis",
     "github.com/labstack/echo",

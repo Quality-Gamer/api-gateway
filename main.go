@@ -1,8 +1,8 @@
 package main
 
 import (
-	"api-gateway/auth"
-	"api-gateway/request"
+	"github.com/Quality-Gamer/api-gateway/auth"
+	"github.com/Quality-Gamer/api-gateway/request"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
