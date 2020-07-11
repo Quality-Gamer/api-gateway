@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"github.com/cheekybits/genny/generic"
 	"github.com/go-redis/redis"
 	"os"
@@ -22,12 +21,7 @@ func SetKey(key string, value generic.Type) {
 }
 
 func GetKey(key string) string {
-	fmt.Println("DEBUG REDIS")
-	fmt.Println(client.Get("gw:ms:ky:qg"))
-	fmt.Println(key)
-	fmt.Println("KEY")
 	val, err := client.Get(key).Result()
-	fmt.Println(val)
 	if err != nil {
 		return ""
 	}
