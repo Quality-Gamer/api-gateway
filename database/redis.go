@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"github.com/cheekybits/genny/generic"
 	"github.com/go-redis/redis"
 	"os"
@@ -21,6 +22,7 @@ func SetKey(key string, value generic.Type) {
 }
 
 func GetKey(key string) string {
+	fmt.Println(client)
 	val, err := client.Get(key).Result()
 	if err != nil {
 		return ""
