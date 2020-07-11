@@ -131,6 +131,7 @@ func makeGETRequest(url string, params map[string]string, action string,ms strin
 
 	req := fasthttp.AcquireRequest()
 	req.Header.SetMethodBytes(strPost)
+	req.Header.Set("Access-Control-Allow-Origin","*")
 	req.SetRequestURIBytes(strRequestURI)
 	res := fasthttp.AcquireResponse()
 	if err := fasthttp.Do(req, res); err != nil {
