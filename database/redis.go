@@ -7,7 +7,7 @@ import (
 )
 
 var client = redis.NewClient(&redis.Options{
-	Addr:     os.Getenv("REDISCLOUD_URL"),
+	Addr:     os.Getenv("REDIS_URL"),
 	Password: os.Getenv("REDIS_PASS"), // no password set
 	DB:       0,  // use default DB
 })
