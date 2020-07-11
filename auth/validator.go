@@ -7,6 +7,7 @@ import (
 )
 
 func KeyValidator(key string) bool {
+	fmt.Println(conf.GetAuthKey())
 	token := database.GetKey(conf.GetAuthKey())
 	fmt.Println(key)
 	fmt.Println(token)
