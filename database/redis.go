@@ -23,7 +23,7 @@ func SetKey(key string, value generic.Type) {
 
 func GetKey(key string) string {
 	fmt.Println("DEBUG REDIS")
-	fmt.Println(client.Keys("*"))
+	fmt.Println(client.Get("gw:ms:ky:qg"))
 	val, err := client.Get(key).Result()
 	if err != nil {
 		return ""
