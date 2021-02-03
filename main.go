@@ -1,10 +1,11 @@
 package main
 
 import (
-	"gateway/auth"
-	"gateway/request"
+	"github.com/Quality-Gamer/api-gateway/auth"
+	"github.com/Quality-Gamer/api-gateway/request"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"os"
 )
 
 //main contains all API endpoints
@@ -20,5 +21,5 @@ func main() {
 	e.POST("/gateway/route", request.Route)
 
 	//os.Getenv("PORT")
-	e.Logger.Fatal(e.Start(":" + "8005"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 }

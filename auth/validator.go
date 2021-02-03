@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"gateway/conf"
-	"gateway/database"
+	"github.com/Quality-Gamer/api-gateway/conf"
+	"github.com/Quality-Gamer/api-gateway/database"
 )
 
 func KeyValidator(key string) bool {

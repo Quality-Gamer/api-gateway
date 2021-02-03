@@ -1,13 +1,14 @@
 package request
 
 import (
+
 	"crypto/sha1"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"gateway/conf"
-	"gateway/database"
-	"gateway/model"
+	"github.com/Quality-Gamer/api-gateway/conf"
+	"github.com/Quality-Gamer/api-gateway/database"
+	"github.com/Quality-Gamer/api-gateway/model"
 	"github.com/cheekybits/genny/generic"
 	"github.com/labstack/echo"
 	"github.com/valyala/fasthttp"
