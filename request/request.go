@@ -136,8 +136,8 @@ func makeGETRequest(url string, params map[string]string, action string,ms strin
 	if err := fasthttp.Do(req, res); err != nil {
 		stopMicroservice(ms)
 		var e model.Response
-		e.Status = conf.ErrorCode
-		e.Message = conf.MSOffMessage
+		e.Status = urlComplete
+		e.Message = err.Error()
 		return e
 	}
 	defer fasthttp.ReleaseRequest(req)
