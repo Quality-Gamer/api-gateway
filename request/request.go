@@ -114,7 +114,9 @@ func makePOSTRequest(url string, params map[string]string, action string,ms stri
 func makeGETRequest(url string, params map[string]string, action string,ms string,cacheable int) generic.Type  {
 	urlComplete := url + "/" + action
 	var strPost = []byte("GET")
-
+	fmt.Println("URL:" + url)
+	fmt.Println("URLCOMPLETE: "+ urlComplete)
+	
 	if len(params) > 0 {
 		urlComplete += "?"
 
